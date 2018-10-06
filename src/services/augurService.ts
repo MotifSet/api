@@ -5,10 +5,7 @@ import { constants } from '../utils/constants';
 const { PUBLIC_ADDRESS, SET_KOVAN_ADDRESSES  } = constants;
 
 export class AugurService {
-    private _provider: Provider;
-    constructor(provider: Provider) {
-        this._provider = provider;
-    }
+    constructor() {}
     
     // TODO
 }

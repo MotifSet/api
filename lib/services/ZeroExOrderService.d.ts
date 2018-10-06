@@ -7,4 +7,4 @@ export declare class ZeroExOrderService {
     generateZeroExOrders(issuanceOrder: SignedIssuanceOrder): Promise<ZeroExSignedFillOrder[]>;
     createSignedZeroExOrder(issuanceOrder: SignedIssuanceOrder, componentIndex: number): Promise<ZeroExSignedFillOrder>;
 }
-//# sourceMappingURL=ZeroExOrderService.d.ts.map
+//# sourceMappingURL=zeroExOrderService.d.ts.map
