@@ -8,6 +8,7 @@ import SetProtocol from 'setprotocol.js';
 import { constants } from './utils/constants';
 import { OrderHandler } from './controllers/orderHandler';
 import { SetsHandler } from './controllers/setsHandler';
+import { CoinCapService} from './services/coinCapService';
 
 const { PUBLIC_ADDRESS } = constants;
 
@@ -31,6 +32,7 @@ const setProtocol = new SetProtocol(providerEngine, {
 
 const orderHandler = new OrderHandler(setProtocol, providerEngine);
 const setsHandler = new SetsHandler(setProtocol, providerEngine);
+const coinCap = new CoinCapService;
 
 const app = express();
 app.use(bodyParser.json()); // for parsing application/json
@@ -47,12 +49,13 @@ app.get('/ping', (req: express.Request, res: express.Response) => {
 
 app.get('/sets', (req, res) => setsHandler.getSets(req, res));
 app.get('/components', (req, res) => setsHandler.getAvailableComponents(req, res));
-
+app.get('/services', (req, res) => coinCap.getStockChart(req,res));
+app.get('/stockQuote', (req, res) => coinCap.getStockQuote(req, res));
 // Order Related Endpoints
 app.get('/quote', (req, res) => orderHandler.getQuote(req, res));
 app.post('/market_order', (req, res) => orderHandler.postMarketOrder(req, res));
 
-const DEFAULT_PORT = 8080;
+const DEFAULT_PORT = 7999;
 const port = process.env.PORT || DEFAULT_PORT;
 console.log(`Listening on port ${port} for new requests`);
 app.listen(port);
