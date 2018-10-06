@@ -1,5 +1,43 @@
 
 // NOTE - these are all KOVAN Deployment addresses
+
+export const coinAddrMap = {
+  "ZRX":{
+    "address": "https://s3.amazonaws.com/set-core/img/coin-icons/zrx.svg",
+    "image": "0xd50f2f5b46bdbc1941f06148030d312ca99d2487"
+  },
+  "ZIL":{
+    "address": "0x626620112850caf174794f208c3f7821725308be",
+    "image": "https://s3.amazonaws.com/set-core/img/coin-icons/zil.svg"
+  },
+  "ICX":{
+    "address": "0x8d5cf870354fffae0586b639da6d4e4f6c659c69",
+    "image": "https://s3.amazonaws.com/set-core/img/coin-icons/icx.svg"
+  },
+  "ZIL":{
+    "address": ,
+    "image":
+  },
+  "ZIL":{
+    "address": ,
+    "image":
+  },
+  "ZIL":{
+    "address": ,
+    "image":
+  },
+  "ZIL":{
+    "address": ,
+    "image":
+  },
+  "ZIL":{
+    "address": ,
+    "image":
+  }
+
+
+}
+
 export const COMPONENTS = [
   {
     "name": "0x",
