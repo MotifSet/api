@@ -11,7 +11,7 @@
         "build": "tsc",
         "dev": "tsc -w",
         "start:dev": "concurrently \"yarn run dev\" \"yarn run start\"",
-        "start": "dotenv -e .env node ./src/server.js",
+        "start": "dotenv -e .env node ./lib/server.js",
         "lint": "tslint --project .",
         "clean": "shx rm -rf lib",
         "prettier": "prettier --write '**/*.{ts,tsx,json,md}' --config ../.prettierrc"
