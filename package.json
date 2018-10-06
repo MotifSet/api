@@ -10,8 +10,8 @@
     "scripts": {
         "build": "tsc",
         "dev": "tsc -w",
-        "start:dev": "concurrently \"yarn run dev\" \"yarn run start\"",
-        "start": "dotenv -e .env node ./lib/server.js",
+        "start:dev": "concurrently \"yarn run dev\" \"dotenv -e .env node ./lib/server.js\"",
+        "start": "node ./lib/server.js",
         "lint": "tslint --project .",
         "clean": "shx rm -rf lib",
         "prettier": "prettier --write '**/*.{ts,tsx,json,md}' --config ../.prettierrc"
