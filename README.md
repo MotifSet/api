@@ -18,7 +18,7 @@ Then run:
 ```
 yarn
 yarn build
-yarn start
+yarn run start:dev
 ```
 
 This should start the app in development mode.
