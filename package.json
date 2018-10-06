@@ -14,7 +14,8 @@
         "start": "node ./lib/server.js",
         "lint": "tslint --project .",
         "clean": "shx rm -rf lib",
-        "prettier": "prettier --write '**/*.{ts,tsx,json,md}' --config ../.prettierrc"
+        "prettier": "prettier --write '**/*.{ts,tsx,json,md}' --config ../.prettierrc",
+        "postinstall": "tsc"
     },
     "author": "Team Motif",
     "license": "MIT",
