@@ -52,7 +52,7 @@ app.get('/components', (req, res) => setsHandler.getAvailableComponents(req, res
 app.get('/quote', (req, res) => orderHandler.getQuote(req, res));
 app.post('/market_order', (req, res) => orderHandler.postMarketOrder(req, res));
 
-const DEFAULT_PORT = 8080;
+const DEFAULT_PORT = 8000;
 const port = process.env.PORT || DEFAULT_PORT;
 console.log(`Listening on port ${port} for new requests`);
 app.listen(port);
