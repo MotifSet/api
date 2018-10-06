@@ -14,26 +14,47 @@ export const coinAddrMap = {
     "address": "0x8d5cf870354fffae0586b639da6d4e4f6c659c69",
     "image": "https://s3.amazonaws.com/set-core/img/coin-icons/icx.svg"
   },
-  "ZIL":{
-    "address": ,
-    "image":
+  "AE":{
+    "address": "0x0766894369d568da332619a4368f16ef52d4c47b",
+    "image": "https://s3.amazonaws.com/set-core/img/coin-icons/ae.svg"
   },
-  "ZIL":{
-    "address": ,
-    "image":
+  "BAT":{
+    "address": "0x6169c62e1aae2d56a2dc184514e8b515ff6f1d9e",
+    "image": "https://s3.amazonaws.com/set-core/img/coin-icons/bat.svg"
   },
-  "ZIL":{
-    "address": ,
-    "image":
+  "REP":{
+    "address": "0xf04ff1487bb27fa6a83f6276a55ae17eb8b3c581",
+    "image": "https://s3.amazonaws.com/set-core/img/coin-icons/rep.svg"
   },
-  "ZIL":{
-    "address": ,
-    "image":
+  "SNT":{
+    "address": "0x9cfe76a718ea75e3e8ce4fc7ad0fef84be70919b",
+    "image": "https://s3.amazonaws.com/set-core/img/coin-icons/snt.svg"
   },
-  "ZIL":{
-    "address": ,
-    "image":
+  "PPT":{
+    "address": "0x3d9da970fa85cb1fa9d405145d4c485224da045e",
+    "image": "https://s3.amazonaws.com/set-core/img/coin-icons/ppt.svg"
+  },
+  "LOOM":{
+    "address": "0x5374e7a0f9e0ad299e094825a220354b6ca6c787",
+    "image": "https://s3.amazonaws.com/set-core/img/coin-icons/loom.svg"
+  },
+  "VET":{
+    "address": "0xb2aa8743633bfcb0bc6aecd6cc0aff96d961f218",
+    "image": "https://s3.amazonaws.com/set-core/img/coin-icons/ven.svg"
+  },
+  "DAI":{
+    "address": "0x931a809658b677390c80a443415d16f4fcd37d1e",
+    "image": "https://s3.amazonaws.com/set-core/img/coin-icons/dai.svg"
+  },
+  "KNC":{
+    "address": "0xa71978db8333586c65be76ed559e7e51fc81ec66",
+    "image": "https://s3.amazonaws.com/set-core/img/coin-icons/knc.svg"
+  },
+  "AST":{
+    "address": "0xc5d96411341d16c4bd16733500d6ab8c5421097e",
+    "image": "https://s3.amazonaws.com/set-core/img/coin-icons/ast.svg"
   }
+
 
 
 }
