@@ -55,8 +55,6 @@ export const coinAddrMap = {
     "image": "https://s3.amazonaws.com/set-core/img/coin-icons/ast.svg"
   }
 
-
-
 }
 
 export const COMPONENTS = [
