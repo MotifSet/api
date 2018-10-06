@@ -14,7 +14,7 @@ const { PUBLIC_ADDRESS } = constants;
 const providerEngine = new Web3ProviderEngine();
 const privateKey = process.env.PRIVATE_KEY as string;
 
-const infura_apikey = "cecfcdfd0a8f46b290496bbd183891a6";
+const infura_apikey = process.env.INFURAKEY;
 const KOVAN_RPC_URL = 'https://kovan.infura.io/' + infura_apikey;
 const pkSubprovider = new PrivateKeyWalletSubprovider(privateKey);
 const rpcSubprovider = new RPCSubprovider(KOVAN_RPC_URL);
