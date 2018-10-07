@@ -22,12 +22,10 @@ export class ZeroXHandler {
     private web3Wrapper: Web3Wrapper;
 
     constructor() {
-        const web3 = new Web3(new Web3.providers.HttpProvider(config.NODE_URI));
+        var web3 = new Web3(new Web3.providers.HttpProvider(config.NODE_URI));
         web3.eth.accounts.privateKeyToAccount(process.env.PRIVATE_KEY)
         this.providerEngine = web3.currentProvider;
 
-        this.providerEngine.addProvider(new RPCSubprovider(config.NODE_URI));
-        this.providerEngine.start();
         // Instantiate ContractWrappers with the provider
         this.contractWrappers = new ContractWrappers(this.providerEngine, { networkId: config.NETWORK_ID});
         this.web3Wrapper = new Web3Wrapper(this.providerEngine);
