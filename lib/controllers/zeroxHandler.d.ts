@@ -1,4 +1,4 @@
-import { SignedOrder } from '@0xproject/order-utils';
+import { SignedOrder } from '0x.js';
 import * as express from 'express';
 export declare class ZeroXHandler {
     private providerEngine;
