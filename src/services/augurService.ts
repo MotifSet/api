@@ -2,7 +2,8 @@ import * as Augur from 'augur';
 import * as express from 'express';
 
 export interface AugurConn {
-    conn: object
+    conn: object,
+    markets: object
 }
 
 interface AugurNode{
@@ -14,7 +15,7 @@ interface ConnectionParams{
 }
 
 
-export class AugerConnection{
+export class AugurConnection{
 
     public augur: object;
     universeId: string = '0xe0fb73227c37051611c3edc091d6858f2a230ffe';
