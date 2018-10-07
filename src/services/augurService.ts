@@ -1,9 +1,10 @@
-import * as Augur from 'augur.js';
+import Augur from 'augur.js';
 import * as express from 'express';
 
 export interface AugurConn {
-    conn: object,
-    markets: object
+    markets: any,
+    connect: any
+    //connect: (params: object, cb: (err: object, connectionInfo: object) => void) => void;
 }
 
 interface AugurNode{
@@ -17,7 +18,7 @@ interface ConnectionParams{
 
 export class AugurConnection{
 
-    public augur: object;
+    public augur: AugurConn;
     universeId: string = '0xe0fb73227c37051611c3edc091d6858f2a230ffe';
     constructor(){
         let ethereumNode = {
@@ -32,7 +33,8 @@ export class AugurConnection{
     
           };  
         let augurNode = "ws://127.0.0.1:9001";
-        this.augur = new Augur().connect({ ethereumNode, augurNode }, (err: object, connectionInfo: object) => {
+        this.augur = new Augur();
+        this.augur.connect({ ethereumNode, augurNode }, (err: object, connectionInfo: object) => {
             if (err != null){
                 console.log("Connected");
             }
