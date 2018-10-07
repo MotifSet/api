@@ -46,18 +46,12 @@ app.get('/services', (req, res) => coinCap.getStockChart(req,res));
 app.get('/stockQuote', (req, res) => coinCap.getStockQuote(req, res));
 
 // Order Related Endpoints
-<<<<<<< HEAD
 app.post('/broadcast', (req, res) => zrxHandler.matchZeroXOrder(req, res));
 
 
 const DEFAULT_PORT = 8000;
-=======
-app.get('/quote', (req, res) => orderHandler.getQuote(req, res));
-app.post('/market_order', (req, res) => orderHandler.postMarketOrder(req, res));
 app.get('/augurCategories', (req, res) => augur.getCategoryData(req, res));
 app.get('/augurMarketData', (req, res) => augur.getMarketData(req, res));  
-const DEFAULT_PORT = 7999;
->>>>>>> 13ba3cc20da82fc7e122e8393310651583572c85
 const port = process.env.PORT || DEFAULT_PORT;
 console.log(`Listening on port ${port} for new requests`);
 app.listen(port);

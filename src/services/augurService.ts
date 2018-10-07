@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-import * as _ from 'lodash';
-
-import { constants } from '../utils/constants';
-
-export class AugurService {
-    constructor() {}
-    
-    // TODO
-=======
 import Augur from 'augur.js';
 import * as express from 'express';
 
@@ -23,7 +13,6 @@ interface AugurNode{
 
 interface ConnectionParams{
     params: object
->>>>>>> 13ba3cc20da82fc7e122e8393310651583572c85
 }
 
 
