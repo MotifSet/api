@@ -7,7 +7,7 @@ export const SETS = [
         price: Math.random() * 10 + 10,
         components: [
             {
-                name: 'S&P 500|Augur',
+                name: 'S&P 500',
                 symbol: 'aSPY',
                 address: '0x1d82471142F0aeEEc9FC375fC975629056c26ceE',
                 units: 5,
@@ -28,7 +28,7 @@ export const SETS = [
         price: Math.random() * 10 + 10,
         components: [
             {
-                name: 'Gold|Augur',
+                name: 'Gold',
                 symbol: 'aGLD',
                 address: '0x1d82471142F0aeEEc9FC375fC975629056c26ceE',
                 units: 5,
@@ -49,7 +49,7 @@ export const SETS = [
         price: Math.random() * 10 + 10,
         components: [
             {
-                name: 'FANG+|Augur',
+                name: 'FANG+',
                 symbol: 'aFANG',
                 address: '0x1d82471142F0aeEEc9FC375fC975629056c26ceE',
                 units: 5,
@@ -70,7 +70,7 @@ export const SETS = [
         price: Math.random() * 10 + 10,
         components: [
             {
-                name: 'Biotechnology|Augur',
+                name: 'Biotechnology',
                 symbol: 'aIBB',
                 address: '0x1d82471142F0aeEEc9FC375fC975629056c26ceE',
                 units: 5,
@@ -91,7 +91,7 @@ export const SETS = [
         price: Math.random() * 10 + 10,
         components: [
             {
-                name: 'US Real Estate|Augur',
+                name: 'US Real Estate',
                 symbol: 'aVNQ',
                 address: '0x1d82471142F0aeEEc9FC375fC975629056c26ceE',
                 units: 5,
