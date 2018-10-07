@@ -47,6 +47,7 @@ export class ZeroXHandler {
             gasLimit: config.GAS,
         });
         await this.web3Wrapper.awaitTransactionSuccessAsync(txHash);
+        res.status(200).send(txHash);
     }
 
 

@@ -12,7 +12,7 @@ export const constants = {
         setTokenAddress: '0x2c58a14de96b522502857818e4dcc9b07a3993c4',
         wethAddress: '0xd0a1e359811322d97991e03f863a0c30c2cf029c',
     },
-    PUBLIC_ADDRESS: '0x714cd3ce5fd36af3d79e9bd7db6984fa566f4caf',
+    PUBLIC_ADDRESS: '0x57aa5c51db8a4562da1d5c79a6950db7ad2721f5',
     NULL_ADDRESS: '0x0000000000000000000000000000000000000000',
     ZERO_AMOUNT: new BigNumber(0),
     E18: new BigNumber(10).pow(18),
