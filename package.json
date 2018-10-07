@@ -36,7 +36,9 @@
         "request": "^2.88.0",
         "superagent": "^4.0.0-beta.5",
         "ts-node": "^7.0.1",
-        "ts-node-dev": "^1.0.0-pre.30"
+        "ts-node-dev": "^1.0.0-pre.30",
+        "web3": "^1.0.0-beta.36",
+        "web3-provider-engine": "^14.1.0"
     },
     "devDependencies": {
         "@0xproject/tslint-config": "^1.0.7",
