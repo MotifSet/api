@@ -60,10 +60,6 @@ export class AugurConnection{
                 res.status(404).send(JSON.stringify(result, null, 2));
             }
             else {
-            //let newResult = JSON.stringify(result, null, 2);
-            //let newResultObj = JSON.parse(newResult); //Don't judge me
-            //console.log(newResultObj[0]);
-            //console.log(newResultObj[0].outcomes);
             let out = result[0].outcomes;
             res.status(200).send(JSON.stringify(out, null, 2));
             }
