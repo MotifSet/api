@@ -55,9 +55,14 @@ export class AugurConnection{
         let marketId = req.query.marketId;
         this.augur.markets.getMarketsInfo({
             marketIds: [marketId]
-        }, function (error: object, result: object){
-            //result = result;
-            res.status(200).send(JSON.stringify(result, null, 2))
+        }, function (error: object, result: Array<any>){
+            if (error != null || result == null){
+                res.status(404).send(JSON.stringify(result, null, 2));
+            }
+            else {
+            result = result[0].outComes;
+            res.status(200).send(JSON.stringify(result, null, 2));
+            }
         });
     }
 
