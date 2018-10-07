@@ -6,6 +6,7 @@ import wrap = require('express-async-wrap');
 import * as _ from 'lodash';
 import SetProtocol, { Address } from 'setprotocol.js';
 
+import { SETS } from '../utils/sets';
 import { constants } from '../utils/constants';
 import { COMPONENTS } from '../utils/components';
 
@@ -29,30 +30,8 @@ export class SetsHandler {
     }
 
     async getSets(req: express.Request, res: express.Response): Promise<void> {
-        const result = [
-            {
-                name: 'Stable Set',
-                symbol: 'STBL',
-                address: '0x2c58a14de96b522502857818e4dcc9b07a3993c4',
-                naturalUnits: 10,
-                components: [
-                    {
-                        name: 'Dai',
-                        symbol: 'DAI',
-                        address: '0x1d82471142F0aeEEc9FC375fC975629056c26ceE',
-                        units: 5,
-                    },
-                    {
-                        name: 'TrueUSD',
-                        symbol: 'TUSD',
-                        address: '0xAdB015D61F4bEb2A712D237D9d4c5B75BAFEfd7B',
-                        units: 5,
-                    },
-                ],
-            },
-        ];
 
-        res.status(200).send(JSON.stringify(result, null, 2));
+        res.status(200).send(JSON.stringify(SETS, null, 2));
     }
 
     async getAvailableComponents(req: express.Request, res: express.Response): Promise<void> {
