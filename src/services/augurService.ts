@@ -41,12 +41,22 @@ export class AugurConnection{
           });
     }
 
-    async getMarketData(req: express.Request, res: express.Response): Promise<void>{
+    async getCategoryData(req: express.Request, res: express.Response): Promise<void>{
         this.augur.markets.getCategories({
             universe: this.universeId,
             sortBy: "popularity",
             isSortDescending: true
         }, function (error: object, result: object){
+            res.status(200).send(JSON.stringify(result, null, 2))
+        });
+    }
+
+    async getMarketData(req: express.Request, res: express.Response): Promise<void>{
+        let marketId = req.query.marketId;
+        this.augur.markets.getMarketsInfo({
+            marketIds: [marketId]
+        }, function (error: object, result: any){
+            result = result[0].outcomes;
             res.status(200).send(JSON.stringify(result, null, 2))
         });
     }
