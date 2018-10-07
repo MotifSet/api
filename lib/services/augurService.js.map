@@ -1,1 +1,1 @@
-{"version":3,"file":"augurService.js","sourceRoot":"","sources":["../../src/services/augurService.ts"],"names":[],"mappings":";;AAGA,gDAA+C;AACvC,IAAA,qDAAc,EAAE,+DAAmB,CAAgB;AAE3D;IACI;IAAe,CAAC;IAGpB,mBAAC;AAAD,CAAC,AAJD,IAIC;AAJY,oCAAY"}
+{"version":3,"file":"augurService.js","sourceRoot":"","sources":["../../src/services/augurService.ts"],"names":[],"mappings":";;AAIA;IACI;IAAe,CAAC;IAGpB,mBAAC;AAAD,CAAC,AAJD,IAIC;AAJY,oCAAY"}

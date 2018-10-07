@@ -3,10 +3,8 @@ import * as bodyParser from 'body-parser';
 import * as express from 'express';
 import wrap = require('express-async-wrap');
 import * as _ from 'lodash';
-import SetProtocol from 'setprotocol.js';
 
 import { constants } from './utils/constants';
-import { OrderHandler } from './controllers/orderHandler';
 import { SetsHandler } from './controllers/setsHandler';
 import { ZeroXHandler } from './controllers/zeroxHandler';
 import { CoinCapService} from './services/coinCapService';
@@ -24,15 +22,7 @@ providerEngine.addProvider(pkSubprovider);
 providerEngine.addProvider(rpcSubprovider);
 providerEngine.start();
 
-const setProtocol = new SetProtocol(providerEngine, {
-    coreAddress: constants.SET_KOVAN_ADDRESSES.coreAddress,
-    setTokenFactoryAddress: constants.SET_KOVAN_ADDRESSES.setTokenFactoryAddress,
-    transferProxyAddress: constants.SET_KOVAN_ADDRESSES.transferProxyAddress,
-    vaultAddress: constants.SET_KOVAN_ADDRESSES.vaultAddress,
-});
-
-const orderHandler = new OrderHandler(setProtocol, providerEngine);
-const setsHandler = new SetsHandler(setProtocol, providerEngine);
+const setsHandler = new SetsHandler();
 const zrxHandler = new ZeroXHandler();
 const coinCap = new CoinCapService;
 
@@ -50,9 +40,9 @@ app.get('/ping', (req: express.Request, res: express.Response) => {
 });
 
 app.get('/sets', (req, res) => setsHandler.getSets(req, res));
-app.get('/components', (req, res) => setsHandler.getAvailableComponents(req, res));
 app.get('/services', (req, res) => coinCap.getStockChart(req,res));
 app.get('/stockQuote', (req, res) => coinCap.getStockQuote(req, res));
+
 // Order Related Endpoints
 app.post('/broadcast', (req, res) => zrxHandler.matchZeroXOrder(req, res));
 
