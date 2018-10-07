@@ -1,14 +1,53 @@
-import SetProtocol, { Address, SignedIssuanceOrder, TakerWalletOrder } from 'setprotocol.js';
-import * as _ from 'lodash';
+import * as Augur from 'augur';
+import * as express from 'express';
 
-import { constants } from '../utils/constants';
-const { PUBLIC_ADDRESS, SET_KOVAN_ADDRESSES  } = constants;
+export interface AugurConn {
+    conn: object
+}
 
-export class AugurService {
-    private _provider: Provider;
-    constructor(provider: Provider) {
-        this._provider = provider;
-    }
+interface AugurNode{
+    uri: string
+}
+
+interface ConnectionParams{
+    params: object
+}
+
+
+export class AugerConnection{
+
+    public augur: object;
+    universeId: string = '0xe0fb73227c37051611c3edc091d6858f2a230ffe';
+    constructor(){
+        let ethereumNode = {
+            httpAddresses: [
+              "http://127.0.0.1:8545", 
+              "https://kovan.augur.net/ethereum-http"
+            ],
+            wsAddresses: [
+              "ws://127.0.0.1:8546", 
+              "wss://kovan.augur.net/ethereum-ws" 
+            ]
     
-    // TODO
+          };  
+        let augurNode = "ws://127.0.0.1:9001";
+        this.augur = new Augur().connect({ ethereumNode, augurNode }, (err: object, connectionInfo: object) => {
+            if (err != null){
+                console.log("Connected");
+            }
+          });
+    }
+
+    async getMarketData(req: express.Request, res: express.Response): Promise<void>{
+        this.augur.markets.getCategories({
+            universe: this.universeId,
+            sortBy: "popularity",
+            isSortDescending: true
+        }, function (error: object, result: object){
+            res.status(200).send(JSON.stringify(result, null, 2))
+        });
+    }
+
+//Example Market
+//0x7ff5587568854bebe22fc75d663dacd4b6aaceb9
 }
