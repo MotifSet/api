@@ -30,7 +30,8 @@ export class SetsHandler {
     }
 
     async getSets(req: express.Request, res: express.Response): Promise<void> {
-
+        console.log(SETS);
+        
         res.status(200).send(JSON.stringify(SETS, null, 2));
     }
 
