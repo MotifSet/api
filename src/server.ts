@@ -54,7 +54,6 @@ app.get('/components', (req, res) => setsHandler.getAvailableComponents(req, res
 app.get('/services', (req, res) => coinCap.getStockChart(req,res));
 app.get('/stockQuote', (req, res) => coinCap.getStockQuote(req, res));
 // Order Related Endpoints
-app.get('/orderParams', (req, res) => zrxHandler.getOrderParams(req, res));
 app.post('/broadcast', (req, res) => zrxHandler.matchZeroXOrder(req, res));
 
 

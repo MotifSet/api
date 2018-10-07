@@ -7,7 +7,6 @@ import {
 } from '@0xproject/order-utils';
 
 import {
-    assetDataUtils,
     BigNumber,
     ContractWrappers,
     generatePseudoRandomSalt,
@@ -20,8 +19,7 @@ import {
 import { RPCSubprovider, Web3ProviderEngine } from '0x.js';
 import { Web3Wrapper } from '@0xproject/web3-wrapper';
 
-import { PrivateKeyWalletSubprovider, Provider, RPCSubprovider, Web3ProviderEngine } from '@0xproject/subproviders';
-import { BigNumber } from '@0xproject/utils';
+import { PrivateKeyWalletSubprovider, Provider } from '@0xproject/subproviders';
 import * as bodyParser from 'body-parser';
 import * as express from 'express';
 import wrap = require('express-async-wrap');
@@ -55,42 +53,6 @@ export class ZeroXHandler {
         // Instantiate ContractWrappers with the provider
         this.contractWrappers = new ContractWrappers(this.providerEngine, { networkId: config.NETWORK_ID});
         this.web3Wrapper = new Web3Wrapper(this.providerEngine);
-    }
-
-    public async getOrderParams(req: express.Request, res: express.Response): Promise<void> {
-        /**
-         * Params:
-         * setTokenAddress: string
-         * quantity: string -> BigNumber
-         * userAddress: string
-         *
-         * Return:
-         * json of zrx order to sign
-         */
-
-        const { setTokenAddress, quantity, userAddress } = req.query;
-
-        const randomExpiration = getRandomFutureDateInSeconds();
-        const exchangeAddress = this.contractWrappers.exchange.getContractAddress();
-
-        // Create the order
-        const order: Order = {
-            exchangeAddress,
-            makerAddress: userAddress,
-            takerAddress: NULL_ADDRESS,
-            senderAddress: NULL_ADDRESS,
-            feeRecipientAddress: NULL_ADDRESS,
-            expirationTimeSeconds: randomExpiration,
-            salt: generatePseudoRandomSalt(),
-            makerAssetAmount,
-            takerAssetAmount,
-            makerAssetData,
-            takerAssetData,
-            makerFee: ZERO,
-            takerFee: ZERO,
-        };
-
-        res.status(200).send(JSON.stringify(order, null, 2));
     }
 
      public async matchZeroXOrder(req: express.Request, res: express.Response): Promise<void> {
