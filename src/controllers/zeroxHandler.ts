@@ -1,14 +1,6 @@
-import {
-    SignedOrder
-} from '@0xproject/order-utils';
-
-import {
-    BigNumber,
-    ContractWrappers
-} from '0x.js';
-
-import { RPCSubprovider, Web3ProviderEngine } from '0x.js';
 import { Web3Wrapper } from '@0xproject/web3-wrapper';
+
+import { Web3ProviderEngine, ContractWrappers, BigNumber, SignedOrder, RPCSubprovider } from '0x.js';
 
 import * as express from 'express';
 import wrap = require('express-async-wrap');
@@ -16,6 +8,7 @@ import * as _ from 'lodash';
 
 import { config } from '../utils/config';
 import { constants } from '../utils/constants';
+
 import {
     COMPONENTS,
 } from '../utils/components';
@@ -28,7 +21,7 @@ export class ZeroXHandler {
 
     constructor() {
         this.providerEngine = new Web3ProviderEngine();
-        this.providerEngine.addProvider(config.NODE_URI);
+        this.providerEngine.addProvider(new RPCSubprovider(config.NODE_URI));
         this.providerEngine.start();
         // Instantiate ContractWrappers with the provider
         this.contractWrappers = new ContractWrappers(this.providerEngine, { networkId: config.NETWORK_ID});
