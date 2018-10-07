@@ -55,13 +55,15 @@ export class AugurConnection{
         let marketId = req.query.marketId;
         this.augur.markets.getMarketsInfo({
             marketIds: [marketId]
-        }, function (error: object, result: Array<any>){
+        }, function (error: object, result: object){
             if (error != null || result == null){
                 res.status(404).send(JSON.stringify(result, null, 2));
             }
             else {
-            result = result[0].outComes;
-            res.status(200).send(JSON.stringify(result, null, 2));
+            let newResult = JSON.stringify(result, null, 2);
+            let newResultObj = JSON.parse(newResult); //Don't judge me
+            let out = newResultObj[0].outComes;
+            res.status(200).send(JSON.stringify(out, null, 2));
             }
         });
     }
