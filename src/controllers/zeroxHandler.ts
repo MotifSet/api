@@ -1,45 +1,25 @@
 import {
-    assetDataUtils,
-    marketUtils,
-    OrdersAndRemainingFillAmount,
-    SignedOrder,
-    sortingUtils,
+    SignedOrder
 } from '@0xproject/order-utils';
 
 import {
     BigNumber,
-    ContractWrappers,
-    generatePseudoRandomSalt,
-    Order,
-    orderHashUtils,
-    signatureUtils,
-    SignerType,
+    ContractWrappers
 } from '0x.js';
 
 import { RPCSubprovider, Web3ProviderEngine } from '0x.js';
 import { Web3Wrapper } from '@0xproject/web3-wrapper';
 
-import { PrivateKeyWalletSubprovider, Provider } from '@0xproject/subproviders';
-import * as bodyParser from 'body-parser';
 import * as express from 'express';
 import wrap = require('express-async-wrap');
 import * as _ from 'lodash';
-import SetProtocol, { Address, SignedIssuanceOrder, TakerWalletOrder, Component, ZeroExSignedFillOrder } from 'setprotocol.js';
 
 import { config } from '../utils/config';
 import { constants } from '../utils/constants';
 import {
-    unJSONifyOrder,
-    bigNumberSum,
-} from '../utils';
-import {
     COMPONENTS,
 } from '../utils/components';
-import { JsonSignedIssuanceOrder } from '../types'
-import { ZeroExOrderService } from '../services/zeroExOrderService';
-import { TakerWalletService } from '../services/takerWalletService';
 
-const { PUBLIC_ADDRESS } = constants;
 
 export class ZeroXHandler {
     private providerEngine: Web3ProviderEngine;
