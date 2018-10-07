@@ -8,6 +8,7 @@ import { constants } from './utils/constants';
 import { SetsHandler } from './controllers/setsHandler';
 import { ZeroXHandler } from './controllers/zeroxHandler';
 import { CoinCapService} from './services/coinCapService';
+import { AugurConnection } from './services/augurService';
 
 const { PUBLIC_ADDRESS } = constants;
 
@@ -25,6 +26,7 @@ providerEngine.start();
 const setsHandler = new SetsHandler();
 const zrxHandler = new ZeroXHandler();
 const coinCap = new CoinCapService;
+const augur = new AugurConnection;
 
 const app = express();
 app.use(bodyParser.json()); // for parsing application/json
@@ -48,6 +50,8 @@ app.post('/broadcast', (req, res) => zrxHandler.matchZeroXOrder(req, res));
 
 
 const DEFAULT_PORT = 8000;
+app.get('/augurCategories', (req, res) => augur.getCategoryData(req, res));
+app.get('/augurMarketData', (req, res) => augur.getMarketData(req, res));  
 const port = process.env.PORT || DEFAULT_PORT;
 console.log(`Listening on port ${port} for new requests`);
 app.listen(port);
