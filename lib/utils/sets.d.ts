@@ -3,6 +3,7 @@ export declare const SETS: {
     symbol: string;
     address: string;
     naturalUnits: number;
+    price: number;
     components: {
         name: string;
         symbol: string;
