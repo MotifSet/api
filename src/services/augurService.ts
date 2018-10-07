@@ -1,4 +1,4 @@
-import * as Augur from 'augur';
+import * as Augur from 'augur.js';
 import * as express from 'express';
 
 export interface AugurConn {
