@@ -27,6 +27,7 @@
         "@0xproject/utils": "^1.0.8",
         "@0xproject/web3-wrapper": "^2.0.2",
         "@types/superagent": "^3.8.4",
+        "bignumber": "^1.1.0",
         "body-parser": "^1.17.1",
         "concurrently": "^4.0.1",
         "express": "^4.15.2",
@@ -36,7 +37,8 @@
         "setprotocol.js": "1.0.3",
         "superagent": "^4.0.0-beta.5",
         "ts-node": "^7.0.1",
-        "ts-node-dev": "^1.0.0-pre.30"
+        "ts-node-dev": "^1.0.0-pre.30",
+        "web3": "^1.0.0-beta.36"
     },
     "devDependencies": {
         "@0xproject/tslint-config": "^1.0.7",

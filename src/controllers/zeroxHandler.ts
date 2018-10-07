@@ -28,6 +28,7 @@ import wrap = require('express-async-wrap');
 import * as _ from 'lodash';
 import SetProtocol, { Address, SignedIssuanceOrder, TakerWalletOrder, Component, ZeroExSignedFillOrder } from 'setprotocol.js';
 
+import { config } from '../utils/config';
 import { constants } from '../utils/constants';
 import {
     unJSONifyOrder,
@@ -45,13 +46,15 @@ const { PUBLIC_ADDRESS } = constants;
 export class ZeroXHandler {
     private providerEngine: Web3ProviderEngine;
     private contractWrappers: ContractWrappers;
+    private web3Wrapper: Web3Wrapper;
 
     constructor() {
         this.providerEngine = new Web3ProviderEngine();
-        this.providerEngine.addProvider(new RPCSubprovider('http://localhost:8545'));
+        this.providerEngine.addProvider(config.NODE_URI);
         this.providerEngine.start();
         // Instantiate ContractWrappers with the provider
-        this.contractWrappers = new ContractWrappers(this.providerEngine, { networkId: NETWORK_CONFIGS.networkId });
+        this.contractWrappers = new ContractWrappers(this.providerEngine, { networkId: config.NETWORK_ID});
+        this.web3Wrapper = new Web3Wrapper(this.providerEngine);
     }
 
     public async getOrderParams(req: express.Request, res: express.Response): Promise<void> {
@@ -59,49 +62,35 @@ export class ZeroXHandler {
          * Params:
          * setTokenAddress: string
          * quantity: string -> BigNumber
+         * userAddress: string
          *
          * Return:
          * json of zrx order to sign
          */
 
-        
-        const { addr, quantity } = req.query;
+        const { setTokenAddress, quantity, userAddress } = req.query;
 
-        const setDetails = await this.setProtocol.setToken.getDetails(setAddress);
-        const { components, naturalUnit } = setDetails;
+        const randomExpiration = getRandomFutureDateInSeconds();
+        const exchangeAddress = this.contractWrappers.exchange.getContractAddress();
 
-        const { ZERO_AMOUNT, E18 } = constants;
-
-        let totalWeth = ZERO_AMOUNT;
-        let totalUSD = ZERO_AMOUNT;
-        let unitUSD = ZERO_AMOUNT;
-        let unitWeth = ZERO_AMOUNT;
-        _.each(components, component => {
-            const componentAddress = component.address;
-            const componentUnit = component.unit;
-            const supportedComponent = _.find(COMPONENTS, ["address", componentAddress]);
-            if (!supportedComponent) {
-                throw new Error(`Component ${componentAddress} is not a supported component`);
-            }
-
-            const componentCostsInEth = componentUnit.mul(quantity).div(naturalUnit).mul(supportedComponent.price_eth);
-            const componentCostsInUSD = componentUnit.mul(quantity).div(naturalUnit).mul(supportedComponent.price_usd);
-            const unitCostInEth = componentUnit.div(naturalUnit).mul(supportedComponent.price_eth);
-            const unitCostInUSD = componentUnit.div(naturalUnit).mul(supportedComponent.price_usd);
-
-            totalWeth = totalWeth.add(componentCostsInEth);
-            totalUSD = totalUSD.add(componentCostsInUSD);
-            unitWeth = unitWeth.add(unitCostInEth);
-            unitUSD = unitUSD.add(unitCostInUSD);
-        });
-        
-        const result = {
-            cost_weth: totalWeth.toString(),
-            cost_usd: totalUSD.toString(),
-            unit_weth: unitWeth.toString(),
-            unit_usd: unitUSD.toString(),
+        // Create the order
+        const order: Order = {
+            exchangeAddress,
+            makerAddress: userAddress,
+            takerAddress: NULL_ADDRESS,
+            senderAddress: NULL_ADDRESS,
+            feeRecipientAddress: NULL_ADDRESS,
+            expirationTimeSeconds: randomExpiration,
+            salt: generatePseudoRandomSalt(),
+            makerAssetAmount,
+            takerAssetAmount,
+            makerAssetData,
+            takerAssetData,
+            makerFee: ZERO,
+            takerFee: ZERO,
         };
-        res.status(200).send(JSON.stringify(result, null, 2));
+
+        res.status(200).send(JSON.stringify(order, null, 2));
     }
 
      public async matchZeroXOrder(req: express.Request, res: express.Response): Promise<void> {
@@ -112,11 +101,27 @@ export class ZeroXHandler {
          * Return:
          * txHash -> string
          */
-        var {}
+        const signedOrder = this.unmarshallOrder(req.body);
+        const takerAssetAmount = Web3Wrapper.toBaseUnitAmount(new BigNumber(0.1), config.DECIMALS);
+        const taker = constants.PUBLIC_ADDRESS;
 
-        var txHash = await contractWrappers.exchange.fillOrderAsync(signedOrder, takerAssetAmount, taker, {
-            gasLimit: TX_DEFAULTS.gas,
+        var txHash = await this.contractWrappers.exchange.fillOrderAsync(signedOrder, takerAssetAmount, taker, {
+            gasLimit: config.GAS,
         });
-        await web3Wrapper.awaitTransactionSuccessAsync(txHash);
+        await this.web3Wrapper.awaitTransactionSuccessAsync(txHash);
+    }
+
+
+    public unmarshallOrder(signedOrderRaw: any): SignedOrder {
+        const signedOrder = {
+            ...signedOrderRaw,
+            salt: new BigNumber(signedOrderRaw.salt),
+            makerAssetAmount: new BigNumber(signedOrderRaw.makerAssetAmount),
+            takerAssetAmount: new BigNumber(signedOrderRaw.takerAssetAmount),
+            makerFee: new BigNumber(signedOrderRaw.makerFee),
+            takerFee: new BigNumber(signedOrderRaw.takerFee),
+            expirationTimeSeconds: new BigNumber(signedOrderRaw.expirationTimeSeconds),
+        };
+        return signedOrder;
     }
 }
