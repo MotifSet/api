@@ -20,13 +20,17 @@ export class CoinCapService {
 
     async getStockChart(req: express.Request, res: express.Response): Promise<void>{
         let ticker: string = req.query.symbol;
+        if (ticker === undefined) {
+            res.status(404).send("Must query with a ticker");
+            return;
+        }
         var resp;
         request
             .get(baseUrl + "/stock/" + ticker.toLowerCase() + "/chart/1m")
             .set("Accept", "application/json")
             .end(function(error, response){
                 if (error || !response.ok){
-                    res.status(404).send(JSON.stringify(res, null, 2));
+                    res.status(404).send(JSON.stringify(error, null, 2));
 
                 } else{
                     resp = response.body;
@@ -58,12 +62,12 @@ export class CoinCapService {
             .set("Accept", "application/json")
             .end(function(error, response){
                 if (error || !response.ok){
-                    res.status(404).send(JSON.stringify(res, null, 2));
+                    res.status(404).send(JSON.stringify(error, null, 2));
 
                 } else{
                     resp = response.body;
                     var newResp = {
-                        "price":resp.delayedPrice
+                        "price": resp.delayedPrice
                     }
                     res.status(200).send(JSON.stringify(newResp, null, 2))
                 }

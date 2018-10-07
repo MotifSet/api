@@ -1,5 +1,9 @@
 import { Provider } from '@0xproject/subproviders';
+import { BigNumber } from '@0xproject/utils';
+import * as bodyParser from 'body-parser';
+import * as express from 'express';
 import wrap = require('express-async-wrap');
+import * as _ from 'lodash';
 import SetProtocol, { Address } from 'setprotocol.js';
 
 import { SETS } from '../utils/sets';
