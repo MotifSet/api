@@ -8,6 +8,7 @@ import SetProtocol from 'setprotocol.js';
 import { constants } from './utils/constants';
 import { OrderHandler } from './controllers/orderHandler';
 import { SetsHandler } from './controllers/setsHandler';
+import { ZeroXHandler } from './controllers/zeroxHandler';
 import { CoinCapService} from './services/coinCapService';
 
 const { PUBLIC_ADDRESS } = constants;
@@ -32,6 +33,7 @@ const setProtocol = new SetProtocol(providerEngine, {
 
 const orderHandler = new OrderHandler(setProtocol, providerEngine);
 const setsHandler = new SetsHandler(setProtocol, providerEngine);
+const zrxHandler = new ZeroXHandler();
 const coinCap = new CoinCapService;
 
 const app = express();
@@ -52,8 +54,7 @@ app.get('/components', (req, res) => setsHandler.getAvailableComponents(req, res
 app.get('/services', (req, res) => coinCap.getStockChart(req,res));
 app.get('/stockQuote', (req, res) => coinCap.getStockQuote(req, res));
 // Order Related Endpoints
-app.get('/quote', (req, res) => orderHandler.getQuote(req, res));
-app.post('/market_order', (req, res) => orderHandler.postMarketOrder(req, res));
+app.post('/broadcast', (req, res) => zrxHandler.matchZeroXOrder(req, res));
 
 
 const DEFAULT_PORT = 8000;
