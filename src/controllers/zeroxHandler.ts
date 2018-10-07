@@ -23,8 +23,9 @@ export class ZeroXHandler {
 
     constructor() {
         var web3 = new Web3(new Web3.providers.HttpProvider(config.NODE_URI));
-        web3.eth.accounts.privateKeyToAccount('0x' + process.env.PRIVATE_KEY);
-        console.log(web3.eth.accounts)
+        var account1 = web3.eth.accounts.privateKeyToAccount('0x' + process.env.PRIVATE_KEY);
+        web3.eth.accounts.push(account1);
+        console.log(web3.eth.accounts[0])
         console.log(process.env.PRIVATE_KEY);
         this.providerEngine = web3.currentProvider;
 
