@@ -13,7 +13,7 @@ import { JsonSignedIssuanceOrder } from './types';
 import SetProtocol, { Address, SignedIssuanceOrder, ZeroExSignedFillOrder } from 'setprotocol.js';
 import { constants } from './utils/constants';
 
-import { ZeroExOrderService } from './services/ZeroExOrderService';
+import { ZeroExOrderService } from './services/zeroExOrderService';
 
 export function unJSONifyOrder(jsonOrder: JsonSignedIssuanceOrder): SignedIssuanceOrder {
     return {
