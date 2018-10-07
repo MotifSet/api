@@ -40,7 +40,7 @@ export class ZeroXHandler {
          * txHash -> string
          */
         const signedOrder = this.unmarshallOrder(req.body);
-        const takerAssetAmount = Web3Wrapper.toBaseUnitAmount(new BigNumber(0.1), config.DECIMALS);
+        const takerAssetAmount = Web3Wrapper.toBaseUnitAmount(new BigNumber(1), config.DECIMALS);
         const taker = constants.PUBLIC_ADDRESS;
 
         var txHash = await this.contractWrappers.exchange.fillOrderAsync(signedOrder, takerAssetAmount, taker, {
